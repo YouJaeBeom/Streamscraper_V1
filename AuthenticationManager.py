@@ -1,0 +1,54 @@
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver import ActionChains
+from seletools.actions import drag_and_drop
+from seleniumwire import webdriver  # Import from seleniumwire
+from selenium.webdriver.firefox.options import Options
+from itertools import repeat
+
+class Authentication_Manager:
+    def get_brwoser():
+        """
+        Get Cookie, Authorization through Firefox browser
+        """
+        print("Get Cookie, Authorization through Firefox browser")
+        ## drowser setting
+        options = Options()
+        options.headless = True
+        driver = webdriver.Firefox(firefox_profile=get_profile(), options=options)
+
+        ## brwoser execute
+        url = "https://twitter.com/search?q=bts&src=typed_query&f=live"
+        driver.get(url)
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(2)
+
+        ## get Cookie, Authorization
+        for request in driver.requests:
+            ## get token, authorization values
+            Cookie = str(request.headers['Cookie']).replace(" ","").split(";")
+            try:
+                x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
+                x_guest_token =  x_guest_token.replace("gt=","")
+                authorization = request.headers['authorization']
+            except :
+                continue
+            if x_guest_token != None and authorization != None:
+                break
+
+
+        ## browser close
+        driver.close()
+        driver.quit()
+
+        return x_guest_token, authorization
+
+
+    def get_profile():
+        """
+        Firefox browser settings
+        """
+        print("Firefox browser settings")
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference("browser.privatebrowsing.autostart", True)
