@@ -1,22 +1,20 @@
 class Scraping_Engine:
-    def __init__(self,query,lan):
-        self.query = query
-        self.lan = lan 
+    def __init__(self, keyword='',language_index='', authorization='', x_guest_token=''):
+        self.keyword = keyword
+        self.language_index = language_index
+
+        ## Setting Language type
+        self.language_types =["en","ja","ko","ar","bn","cs","da","de","el","es","fa","fi","fil","he","hi","hu","id","it","msa","nl","no","pl","pt","ro","ru","sv","th","tr","uk","ur","vi","zh-cn","zh-tw"]
+        self.accept_language = self.language_types[int(self.language_index)]
+        self.x_twitter_client_language = self.language_types[int(self.language_index)]
+
+        ## Setting authorization keysets
+        self.authorization = authorization
+        self.x_guest_token = x_guest_token 
         self.base_url = "https://twitter.com/search?q="
 
     def set_search_url(self):
-        if self.min_replies is not None:
-            self.query = self.query + "min_replies:"+self.min_replies + " "
-        elif self.min_likes is not None:
-            self.query = self.query + "min_likes:"+self.min_likes + " "
-        elif self.min_retweets is not None:
-            self.query = self.query + "min_retweets:"+self.min_retweets + " "
-        elif self.place is not None:
-            self.query = self.query + "near:"+self.place + " "
-        elif self.within is not None:
-            self.query = self.query + "within:"+self.within + " "
-
-        self.url = self.base_url + (self.query) +" min_replies:0 min_faves:0 min_retweets:0&src=typed_query&f=live"
+        self.url = self.base_url + self.keyword +"&src=typed_query&f=live"
 
         return self.url
 
@@ -29,16 +27,23 @@ class Scraping_Engine:
             #self.cursor = None
             
             ## setting header
-            self.headers = {
+            headers = {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
                     'Accept': '*/*',
-                    'Accept-Language': str(self.accept_language),
-                    'x-guest-token': str(self.x_guest_token),  # cookies setting
-                    'x-twitter-client-language': str(self.x_twitter_client_language) ,
+                    'Accept-Language': 'en',
+                    #'Accept-Encoding': 'gzip, deflate, br',
+                    'x-guest-token': x_guest_token,
+                    'x-twitter-client-language': 'en',
                     'x-twitter-active-user': 'yes',
-                    'authorization': str(self.authorization),  ## authorization setting
-                    'referer': self.url,  ## base url setting
+                    'x-csrf-token': 'c931c4b02e64508ab1dd9b61c19c4614',
+                    'Sec-Fetch-Dest': 'empty',
+                    'Sec-Fetch-Mode': 'cors',
+                    'Sec-Fetch-Site': 'same-origin',
+                    'authorization': authorization,
+                    'Referer': 'https://twitter.com/search?q=bts&src=typed_query&f=live',
+                    'Connection': 'keep-alive',
+                    'TE': 'trailers',
             }
-            
             ## setting parameters
             self.params = (
                     ('include_profile_interstitial_type', '1'),
