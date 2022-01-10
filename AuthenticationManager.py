@@ -7,7 +7,7 @@ from seleniumwire import webdriver  # Import from seleniumwire
 from selenium.webdriver.firefox.options import Options
 from itertools import repeat
 
-class Authentication_Manager:
+class AuthenticationManager:
     def get_brwoser():
         """
         Get Cookie, Authorization through Firefox browser

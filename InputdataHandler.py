@@ -57,28 +57,31 @@ def get_profile():
 
 
 # This block of code enables us to call the script from command line.
-def execute(process,x_guest_token,authorization):
+def execute(keyword,index_num,authorization,x_guest_token):
     try:
-        command = "scrapy crawl_many -q '%s' -x '%s' -a '%s' -p %s -m %s"%("bts",str(x_guest_token),str(authorization),str(process),str(1))
+        command = "python ScrapingEngine.py --keyword '%s' --index_num '%s' --authorization '%s' --x_guest_token '%s'"%(keyword,index_num,authorization,x_guest_token)
         print(command)
         os.system(command)
     except Exception as ex:
-        print(command)
         print(ex)
 
 
 
 if __name__ == '__main__':
     start=time.time()
+    numOflan = 2
+    with open('list.txt', 'r') as f:
+        keyword_list = f.read().split(',')
 
-    # Creating the tuple of all the processes
-    all_processes = []
-    for ps in range(0,33):
-        all_processes.append(ps)
+    for keyword in (keyword_list):
+        # Creating the tuple of all the processes
+        index_num = []
+        for index in range(0,numOflan+1):
+            index_num.append(index)
 
-    x_guest_token, authorization = get_brwoser()
+        x_guest_token, authorization = get_brwoser()
 
-    process_pool = multiprocessing.Pool(processes = 32)
-    process_pool.starmap(execute, zip(all_processes,repeat(x_guest_token),repeat(authorization)))
+        process_pool = multiprocessing.Pool(processes = numOflan)
+        process_pool.starmap(execute, zip(repeat(keyword),index_num,repeat(authorization),repeat(x_guest_token)))
 
 print("-------%s seconds -----"%(time.time()-start))
