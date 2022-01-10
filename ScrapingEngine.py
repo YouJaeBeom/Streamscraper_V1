@@ -2,7 +2,19 @@ import argparse
 import requests
 import json
 import logging
-logger = logging.getLogger(__name__)
+# 로그 생성
+logger = logging.getLogger()
+
+# 로그의 출력 기준 설정
+logger.setLevel(logging.CRITICAL)
+
+# log 출력 형식
+formatter = logging.Formatter('%(asctime)s - %(message)s')
+
+# log를 파일에 출력
+file_handler = logging.FileHandler('log.txt')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 import time
 from datetime import datetime
@@ -36,6 +48,9 @@ class ScrapingEngine(object):
 
         ## Setting base url
         self.base_url = "https://twitter.com/search?q="
+
+        ## Setting kafka
+        self.producer = KafkaProducer(acks=0, compression_type='gzip', api_version=(0, 10, 1), bootstrap_servers=['117.17.189.205:9092','117.17.189.205:9093','117.17.189.205:9094'])
     
     def get_profile(self):
         """
@@ -130,7 +145,7 @@ class ScrapingEngine(object):
                     ('simple_quoted_tweet', 'true'),
                     ('q', self.keyword+" -is:retweet"),
                     ('tweet_search_mode', 'live'),
-                    ('count', '200'),
+                    ('count', '40'),
                     ('query_source', 'typed_query'),
                     ('pc', '1'),
                     ('spelling_corrections', '1'),
@@ -196,14 +211,32 @@ class ScrapingEngine(object):
             else :
                 self.id_strList.append(tweet['id_str'])
                 self.tweetcount = self.tweetcount + 1
-                #print(tweet)
+                print(tweet['created_at'], tweet['full_text'])
+                try:
+                    self.producer.send(self.keyword, json.dumps(tweet).encode('utf-8'))
+                    self.producer.flush()
+                except Exception as ex:
+                    print("ex",ex)
 
+        if len(self.id_strList) < 30:
+            self.cursor = None
+            
+        if self.dup_count == len(tweets):
+            pass
+
+        elif self.dup_count != len(tweets):
+            self.cursor = None 
+        
         self.totalcount = self.totalcount + self.tweetcount
 
         now = datetime.now()
-        result_print = "|curent_time={0:<10}|index_num={1:<10}|keyword={2:<20}|tweet_count={3:<10}|cursor={4:<10}".format(
-        now.strftime("%Y-%m-%d %H:%M:%S"), self.index_num, self.keyword, self.totalcount,str(self.cursor))
-        print(result_print)
+        result_print = "|index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|cursor={3:<10}".format(
+                self.index_num, 
+                self.keyword, 
+                self.totalcount,
+                str(self.cursor)
+                )
+        #print(result_print)
         logger.critical(result_print)
 
 
