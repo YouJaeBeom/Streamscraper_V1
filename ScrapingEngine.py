@@ -1,6 +1,7 @@
 import argparse 
 import requests
 import json
+import sys
 import logging
 # 로그 생성
 logger = logging.getLogger()
@@ -98,6 +99,13 @@ class ScrapingEngine(object):
         return self.url
 
     def start_scraping(self):
+        """
+        Tweet object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/tweet
+        Entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/entities
+        Extended entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/extended-entities
+        Geo object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
+        """
+
         ## get URL
         self.url = self.set_search_url()
         
@@ -175,69 +183,70 @@ class ScrapingEngine(object):
                 continue
 
             else :
-                self.tweets = self.response_json['globalObjects']['tweets']
-                try :
-                    ## get current cur range
-                    self.cursor = str(self.response_json['timeline']['instructions'][len(self.response_json['timeline']['instructions'])-1]['replaceEntry']['entry']['content']['operation']['cursor']['value'] )
-                except :
-                    ## get current cur range
-                    self.cursor = str(self.response_json['timeline']['instructions'][0]['addEntries']['entries'][len(self.response_json['timeline']['instructions'][0]['addEntries']['entries'])-1]['content']['operation']['cursor']['value'])
+                self.tweets = self.response_json['globalObjects']['tweets'].values()
+                
+                self.tweetcount = 0
+                self.dup_count = 0
 
-            try:
-                #print("self.parse_tweets",self.tweets.values())
-                self.parse_tweets(self.tweets.values())
-            except Exception as es:
-                print(es)
+                ## tweets to tweet
+                for tweet in self.tweets:
+                    ## overlap tweet
+                    if tweet['id_str'] in self.id_strList:
+                        self.dup_count = self.dup_count + 1
 
+                    # No overlap tweet
+                    else :
+                        self.id_strList.append(tweet['id_str'])
+                        self.tweetcount = self.tweetcount + 1
+                        #print(tweet['created_at'], tweet['full_text'])
+                        try:
+                            self.producer.send(self.keyword, json.dumps(tweet).encode('utf-8'))
+                            self.producer.flush()
+                        except Exception as ex:
+                            print("ex",ex)
 
-    def parse_tweets(self,tweets):
-        """
-        Parse tweets and store them in item
-        Tweet object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/tweet
-        Entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/entities
-        Extended entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/extended-entities
-        Geo object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
-        """
-        self.tweetcount = 0
-        self.dup_count = 0
+                self.totalcount = self.totalcount + self.tweetcount
 
-        ## tweets to tweet
-        for tweet in tweets:
-            ## overlap tweet
-            if tweet['id_str'] in self.id_strList:
-                self.dup_count = self.dup_count + 1
-                continue
-            # No overlap tweet
-            else :
-                self.id_strList.append(tweet['id_str'])
-                self.tweetcount = self.tweetcount + 1
-                print(tweet['created_at'], tweet['full_text'])
-                try:
-                    self.producer.send(self.keyword, json.dumps(tweet).encode('utf-8'))
-                    self.producer.flush()
-                except Exception as ex:
-                    print("ex",ex)
+                if len(self.id_strList) < 30:
+                    self.cursor = None
+                else:
+                    if self.dup_count < 2:
+                        try :
+                            ## get current cur range
+                            self.cursor = str(self.response_json['timeline']['instructions'][len(self.response_json['timeline']['instructions'])-1]['replaceEntry']['entry']['content']['operation']['cursor']['value'] )
+                        except :
+                            ## get current cur range
+                            self.cursor = str(self.response_json['timeline']['instructions'][0]['addEntries']['entries'][len(self.response_json['timeline']['instructions'][0]['addEntries']['entries'])-1]['content']['operation']['cursor']['value'])
 
-        if len(self.id_strList) < 30:
-            self.cursor = None
-            
-        if self.dup_count == len(tweets):
-            pass
+                        now = datetime.now()
+                        result_print = "ALL dup |index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
+                            self.index_num,
+                            self.keyword,
+                            self.totalcount,
+                            len(self.id_strList),
+                            sys.getsizeof(self.id_strList),
+                            str(self.cursor)
+                        )
+                        print(result_print)
+                        logger.critical(result_print)
 
-        elif self.dup_count != len(tweets):
-            self.cursor = None 
-        
-        self.totalcount = self.totalcount + self.tweetcount
+                    else:
+                        self.cursor = None
+                        now = datetime.now()
+                        result_print = "Not dup |index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
+                            self.index_num,
+                            self.keyword,
+                            self.totalcount,
+                            len(self.id_strList),
+                            sys.getsizeof(self.id_strList),
+                            str(self.cursor)
+                        )
+                        print(result_print)
+                        logger.critical(result_print)
 
-        now = datetime.now()
-        result_print = "|index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|cursor={3:<10}".format(
-                self.index_num, 
-                self.keyword, 
-                self.totalcount,
-                str(self.cursor)
-                )
-        #print(result_print)
-        logger.critical(result_print)
+                    ## Memory leak protect
+                    if len(self.id_strList) > 1000:
+                        del self.id_strList[:500]
 
 
 if(__name__ == '__main__') :
