@@ -69,7 +69,7 @@ def execute(keyword,index_num,authorization,x_guest_token):
 
 if __name__ == '__main__':
     start=time.time()
-    numOflan = 1
+    numOflan = 32
     with open('list.txt', 'r') as f:
         keyword_list = f.read().split(',')
 

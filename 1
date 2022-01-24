@@ -198,12 +198,14 @@ class ScrapingEngine(object):
                     else :
                         self.id_strList.append(tweet['id_str'])
                         self.totalcount = self.totalcount + 1
+                        #print(self.totalcount ,tweet['created_at'])
                         try:
                             self.producer.send(self.keyword, json.dumps(tweet).encode('utf-8'))
                             self.producer.flush()
                         except Exception as ex:
                             print("ex",ex)
 
+                #self.totalcount = self.totalcount + self.tweetcount
 
                 if len(self.id_strList) < 30:
                     self.cursor = None
@@ -220,8 +222,8 @@ class ScrapingEngine(object):
                         result_print = "ALL dup |index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
                             self.index_num,
                             self.keyword,
-                            len(self.id_strList),
                             self.totalcount,
+                            len(self.id_strList),
                             sys.getsizeof(self.id_strList),
                             str(self.cursor)
                         )
@@ -234,8 +236,8 @@ class ScrapingEngine(object):
                         result_print = "Not dup |index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
                             self.index_num,
                             self.keyword,
-                            len(self.id_strList),
                             self.totalcount,
+                            len(self.id_strList),
                             sys.getsizeof(self.id_strList),
                             str(self.cursor)
                         )
@@ -243,8 +245,8 @@ class ScrapingEngine(object):
                         logger.critical(result_print)
 
                     ## Memory leak protect
-                    if len(self.id_strList) > 10000:
-                        del self.id_strList[:2000]
+                    """if len(self.id_strList) > 1000:
+                        del self.id_strList[:500]"""
 
 
 if(__name__ == '__main__') :
