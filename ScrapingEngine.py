@@ -112,7 +112,7 @@ class ScrapingEngine(object):
         while (True):
             ## setting header
             self.headers = {
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
+                    #'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
                     'Accept': '*/*',
                     'Accept-Language': self.accept_language,
                     #'Accept-Encoding': 'gzip, deflate, br',
