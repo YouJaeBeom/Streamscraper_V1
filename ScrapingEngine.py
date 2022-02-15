@@ -173,8 +173,8 @@ class ScrapingEngine(object):
                     with open(filename, 'w') as f:
                         f.write(','.join(self.id_strList))
                         
-        #self.next_requests_setting()
-        self.refresh_requests_setting()
+        self.next_requests_setting()
+        #self.refresh_requests_setting()
         
     def refresh_requests_setting(self):
         self.cursor = GetCursor.get_refresh_cursor(self.response_json)
@@ -218,8 +218,7 @@ class ScrapingEngine(object):
             logger.critical(result_print)
             
         else:
-            if self.dup_count <= 1:
-                
+            if self.dup_count <= 1:                
                 self.cursor=GetCursor.get_scroll_cursor(self.response_json)
                 
                 result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
