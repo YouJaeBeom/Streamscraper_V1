@@ -17,6 +17,9 @@ file_handler = logging.FileHandler('log.txt')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
+import AuthenticationManager
+import GetCursor
+
 import time
 from datetime import datetime
 from datetime import timedelta
@@ -52,59 +55,15 @@ class ScrapingEngine(object):
 
         ## Setting kafka
         self.producer = KafkaProducer(acks=0, compression_type='gzip', api_version=(0, 10, 1), bootstrap_servers=['117.17.189.205:9092','117.17.189.205:9093','117.17.189.205:9094'])
-    
-    def get_profile(self):
-        """
-        Firefox browser settings
-        """
-        profile = webdriver.FirefoxProfile()
-        profile.set_preference("browser.privatebrowsing.autostart", True)
-        return profile
-
-    def get_brwoser(self):
-        """
-        Get Cookie, Authorization through Firefox browser
-        """
-        ## drowser setting
-        self.options = Options()
-        self.options.headless = True
-        self.driver = webdriver.Firefox(firefox_profile=self.get_profile(), options=self.options)
-
-        ## brwoser execute
-        self.driver.get(self.url)
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(2)
-
-        ## get Cookie, Authorization
-        for request in self.driver.requests:
-            ## get token, authorization values
-            Cookie = str(request.headers['Cookie']).replace(" ","").split(";")
-            print(self.process_num,"RESET get Cookie, Authorization")
-            try:
-                self.x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
-                self.x_guest_token =  self.x_guest_token.replace("gt=","")
-                self.authorization = request.headers['authorization']
-            except :
-                continue
-            if self.x_guest_token != None and self.authorization != None:
-                break
-
-        ## browser close
-        self.driver.close()
-        self.driver.quit()
-
+        
     def set_search_url(self):
         self.url = self.base_url + self.keyword +"&src=typed_query&f=live"
 
         return self.url
 
     def start_scraping(self):
-        """
-        Tweet object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/tweet
-        Entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/entities
-        Extended entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/extended-entities
-        Geo object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
-        """
+        ## start tweet collection function 
+        ## http requests 
 
         ## get URL
         self.url = self.set_search_url()
@@ -112,14 +71,16 @@ class ScrapingEngine(object):
         while (True):
             ## setting header
             self.headers = {
-                    #'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
                     'Accept': '*/*',
                     'Accept-Language': self.accept_language,
+                    #'Accept-Language': "en",
                     #'Accept-Encoding': 'gzip, deflate, br',
                     'x-guest-token': self.x_guest_token,
                     'x-twitter-client-language': self.x_twitter_client_language,
+                    #'x-twitter-client-language': "en",
                     'x-twitter-active-user': 'yes',
-                    #'x-csrf-token': 'c931c4b02e64508ab1dd9b61c19c4614',
+                    'x-csrf-token': 'c931c4b02e64508ab1dd9b61c19c4614',
                     'Sec-Fetch-Dest': 'empty',
                     'Sec-Fetch-Mode': 'cors',
                     'Sec-Fetch-Site': 'same-origin',
@@ -166,86 +127,134 @@ class ScrapingEngine(object):
                 self.response = requests.get(
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
-                        params=self.params
+                        params=self.params,
+                        timeout=3
                         )
                 
                 self.response_json = self.response.json()
+                self.get_tweets(self.response_json)
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
-                print("If API is restricted, request to change Cookie and Authorization again")
-                self.get_brwoser()
+                print(self.index_num,ex)
+                self.x_guest_token, self.authorization = AuthenticationManager.get_brwoser(self.keyword)
                 continue
 
-            if str(self.response.status_code) != "200":
-                ## If API is restricted, request to change Cookie and Authorization again
-                print(" Response status code was not 200")
-                self.get_brwoser()
-                continue
+    def get_tweets(self,response_json):
+        """
+        Tweet object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/tweet
+        Entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/entities
+        Extended entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/extended-entities
+        Geo object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
+        """
+        self.response_json = response_json
 
+        
+        self.tweets = self.response_json['globalObjects']['tweets'].values()
+        
+        self.dup_count = 0
+
+        ## tweets to tweet
+        for tweet in self.tweets:
+            ## overlap tweet
+            if tweet['id_str'] in self.id_strList:
+                self.dup_count = self.dup_count + 1
+
+            # No overlap tweet
             else :
-                self.tweets = self.response_json['globalObjects']['tweets'].values()
+                self.id_strList.append(tweet['id_str'])
+                self.totalcount = self.totalcount + 1
+                try:                    
+                    self.producer.send(self.keyword, json.dumps(tweet).encode('utf-8'))
+                    self.producer.flush()
+                except Exception as e:
+                    print(e)
+                finally:
+                    filename = self.index_num+".txt"
+                    with open(filename, 'w') as f:
+                        f.write(','.join(self.id_strList))
+                        
+        #self.next_requests_setting()
+        self.refresh_requests_setting()
+        
+    def refresh_requests_setting(self):
+        self.cursor = GetCursor.get_refresh_cursor(self.response_json)
+        result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
+                self.index_num,
+                self.keyword,
+                len(self.id_strList),
+                self.totalcount,
+                sys.getsizeof(self.id_strList),
+                #"None"
+                str(self.cursor)
+                #str(self.x_guest_token)
+        )
+        print(result_print)
+        logger.critical(result_print)
+        
+        ## Memory leak protect
+        if len(self.id_strList) > 10000:
+            del self.id_strList[:2000]
+        
+    def next_requests_setting(self):
+        """
+        check duplicate and find next requests cursor setting 
+        refresh cursor -> re requests now page
+        scroll cursor -> next page requests to find the omission
+        """
+        if len(self.id_strList) < 30:
+            #self.cursor = GetCursor.get_refresh_cursor(self.response_json)
+            self.cursor = None
+            result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
+                    self.index_num,
+                    self.keyword,
+                    len(self.id_strList),
+                    self.totalcount,
+                    sys.getsizeof(self.id_strList),
+                    "None"
+                    #str(self.cursor)
+                    #str(self.x_guest_token)
+            )
+            print(result_print)
+            logger.critical(result_print)
+            
+        else:
+            if self.dup_count <= 1:
                 
-                #self.tweetcount = 0
-                self.dup_count = 0
+                self.cursor=GetCursor.get_scroll_cursor(self.response_json)
+                
+                result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
+                    self.index_num,
+                    self.keyword,
+                    len(self.id_strList),
+                    self.totalcount,
+                    sys.getsizeof(self.id_strList),
+                    #"scroll down"
+                    str(self.cursor)
+                    #str(self.x_guest_token)
+                )
+                print(result_print)
+                logger.critical(result_print)
 
-                ## tweets to tweet
-                for tweet in self.tweets:
-                    ## overlap tweet
-                    if tweet['id_str'] in self.id_strList:
-                        self.dup_count = self.dup_count + 1
+            else:
+                #self.cursor = GetCursor.get_refresh_cursor(self.response_json)
+                self.cursor = None
+                
+                result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
+                    self.index_num,
+                    self.keyword,
+                    len(self.id_strList),
+                    self.totalcount,
+                    sys.getsizeof(self.id_strList),
+                    #"refresh"
+                    str(self.cursor)
+                    #str(self.x_guest_token)
+                )
+                print(result_print)
+                logger.critical(result_print)
 
-                    # No overlap tweet
-                    else :
-                        self.id_strList.append(tweet['id_str'])
-                        self.totalcount = self.totalcount + 1
-                        try:
-                            self.producer.send(self.keyword, json.dumps(tweet).encode('utf-8'))
-                            self.producer.flush()
-                        except Exception as ex:
-                            print("ex",ex)
-
-
-                if len(self.id_strList) < 30:
-                    self.cursor = None
-                else:
-                    if self.dup_count < 2:
-                        try :
-                            ## get current cur range
-                            self.cursor = str(self.response_json['timeline']['instructions'][len(self.response_json['timeline']['instructions'])-1]['replaceEntry']['entry']['content']['operation']['cursor']['value'] )
-                        except :
-                            ## get current cur range
-                            self.cursor = str(self.response_json['timeline']['instructions'][0]['addEntries']['entries'][len(self.response_json['timeline']['instructions'][0]['addEntries']['entries'])-1]['content']['operation']['cursor']['value'])
-
-                        now = datetime.now()
-                        result_print = "ALL dup |index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
-                            self.index_num,
-                            self.keyword,
-                            len(self.id_strList),
-                            self.totalcount,
-                            sys.getsizeof(self.id_strList),
-                            str(self.cursor)
-                        )
-                        print(result_print)
-                        logger.critical(result_print)
-
-                    else:
-                        self.cursor = None
-                        now = datetime.now()
-                        result_print = "Not dup |index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
-                            self.index_num,
-                            self.keyword,
-                            len(self.id_strList),
-                            self.totalcount,
-                            sys.getsizeof(self.id_strList),
-                            str(self.cursor)
-                        )
-                        print(result_print)
-                        logger.critical(result_print)
-
-                    ## Memory leak protect
-                    if len(self.id_strList) > 10000:
-                        del self.id_strList[:2000]
-
+            ## Memory leak protect
+            if len(self.id_strList) > 10000:
+                del self.id_strList[:2000]
 
 if(__name__ == '__main__') :
     parser = argparse.ArgumentParser()
