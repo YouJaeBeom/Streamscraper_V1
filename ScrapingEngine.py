@@ -2,16 +2,20 @@ import argparse
 import requests
 import json
 import sys
-import logging
-# 로그 생성
-logger = logging.getLogger()
+import time
+from datetime import datetime, timedelta
+import maya
+from pytz import timezone
 
+KST = timezone('Asia/Seoul')
+
+# 로그 생성
+import logging
+logger = logging.getLogger()
 # 로그의 출력 기준 설정
 logger.setLevel(logging.CRITICAL)
-
 # log 출력 형식
 formatter = logging.Formatter('%(asctime)s - %(message)s')
-
 # log를 파일에 출력
 file_handler = logging.FileHandler('log.txt')
 file_handler.setFormatter(formatter)
@@ -20,24 +24,20 @@ logger.addHandler(file_handler)
 import AuthenticationManager
 import GetCursor
 
-import time
-from datetime import datetime
-from datetime import timedelta
-
 ## set kafka
 from kafka import KafkaProducer
-
 ## selenium import setting
 from seleniumwire import webdriver
 from selenium.webdriver.firefox.options import Options
 
 class ScrapingEngine(object):
+    
     def __init__(self, keyword, index_num, authorization, x_guest_token):
         self.keyword = keyword
         self.index_num = index_num
 
         ## Setting Language type
-        self.language_types =["en","ja","ko","ar","bn","cs","da","de","el","es","fa","fi","fil","he","hi","hu","id","it","msa","nl","no","pl","pt","ro","ru","sv","th","tr","uk","ur","vi","zh-cn","zh-tw"]
+        self.language_types =["en","ar","bn","cs","da","de","el","es","fa","fi","fil","fr","he","hi","hu","id","it","ja","ko","msa","nl","no","pl","pt","ro","ru","sv","th","tr","uk","ur","vi","zh-cn","zh-tw"]
         self.accept_language = self.language_types[int(self.index_num)]
         self.x_twitter_client_language = self.language_types[int(self.index_num)]
 
@@ -58,7 +58,6 @@ class ScrapingEngine(object):
         
     def set_search_url(self):
         self.url = self.base_url + self.keyword +"&src=typed_query&f=live"
-
         return self.url
 
     def start_scraping(self):
@@ -74,11 +73,9 @@ class ScrapingEngine(object):
                     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
                     'Accept': '*/*',
                     'Accept-Language': self.accept_language,
-                    #'Accept-Language': "en",
                     #'Accept-Encoding': 'gzip, deflate, br',
                     'x-guest-token': self.x_guest_token,
                     'x-twitter-client-language': self.x_twitter_client_language,
-                    #'x-twitter-client-language': "en",
                     'x-twitter-active-user': 'yes',
                     'x-csrf-token': 'c931c4b02e64508ab1dd9b61c19c4614',
                     'Sec-Fetch-Dest': 'empty',
@@ -147,12 +144,12 @@ class ScrapingEngine(object):
         Geo object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
         """
         self.response_json = response_json
-
-        
         self.tweets = self.response_json['globalObjects']['tweets'].values()
         
+        ## setup
         self.dup_count = 0
-
+        self.now = (datetime.now().astimezone(KST) - timedelta(minutes=1))
+        
         ## tweets to tweet
         for tweet in self.tweets:
             ## overlap tweet
@@ -160,33 +157,30 @@ class ScrapingEngine(object):
                 self.dup_count = self.dup_count + 1
 
             # No overlap tweet
-            else :
-                self.id_strList.append(tweet['id_str'])
-                self.totalcount = self.totalcount + 1
-                try:                    
-                    self.producer.send(self.keyword, json.dumps(tweet).encode('utf-8'))
-                    self.producer.flush()
-                except Exception as e:
-                    print(e)
-                finally:
-                    filename = self.index_num+".txt"
-                    with open(filename, 'w') as f:
-                        f.write(','.join(self.id_strList))
-                        
-        self.next_requests_setting()
-        #self.refresh_requests_setting()
+            else :           
+                self.created_at = (maya.parse(tweet['created_at']).datetime()).astimezone(KST)
+                if self.now < self.created_at:
+                    self.id_strList.append(tweet['id_str'])
+                    self.totalcount = self.totalcount + 1
+                    print(tweet)
+                    try:                    
+                        self.producer.send("bts", json.dumps(tweet).encode('utf-8'))
+                        self.producer.flush()
+                    except Exception as e:
+                        print(e)
+                    
+        self.refresh_requests_setting()
+        #self.next_requests_setting()
         
     def refresh_requests_setting(self):
         self.cursor = GetCursor.get_refresh_cursor(self.response_json)
-        result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
-                self.index_num,
+        
+        result_print = "lan_type={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|".format(
+                self.accept_language,
                 self.keyword,
                 len(self.id_strList),
                 self.totalcount,
-                sys.getsizeof(self.id_strList),
-                #"None"
-                str(self.cursor)
-                #str(self.x_guest_token)
+                sys.getsizeof(self.id_strList)
         )
         print(result_print)
         logger.critical(result_print)
@@ -195,66 +189,8 @@ class ScrapingEngine(object):
         if len(self.id_strList) > 10000:
             del self.id_strList[:2000]
         
-    def next_requests_setting(self):
-        """
-        check duplicate and find next requests cursor setting 
-        refresh cursor -> re requests now page
-        scroll cursor -> next page requests to find the omission
-        """
-        if len(self.id_strList) < 30:
-            #self.cursor = GetCursor.get_refresh_cursor(self.response_json)
-            self.cursor = None
-            result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
-                    self.index_num,
-                    self.keyword,
-                    len(self.id_strList),
-                    self.totalcount,
-                    sys.getsizeof(self.id_strList),
-                    "None"
-                    #str(self.cursor)
-                    #str(self.x_guest_token)
-            )
-            print(result_print)
-            logger.critical(result_print)
-            
-        else:
-            if self.dup_count <= 1:                
-                self.cursor=GetCursor.get_scroll_cursor(self.response_json)
-                
-                result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
-                    self.index_num,
-                    self.keyword,
-                    len(self.id_strList),
-                    self.totalcount,
-                    sys.getsizeof(self.id_strList),
-                    #"scroll down"
-                    str(self.cursor)
-                    #str(self.x_guest_token)
-                )
-                print(result_print)
-                logger.critical(result_print)
-
-            else:
-                #self.cursor = GetCursor.get_refresh_cursor(self.response_json)
-                self.cursor = None
-                
-                result_print = "index_num={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|NEXT cursor={5:<10}".format(
-                    self.index_num,
-                    self.keyword,
-                    len(self.id_strList),
-                    self.totalcount,
-                    sys.getsizeof(self.id_strList),
-                    #"refresh"
-                    str(self.cursor)
-                    #str(self.x_guest_token)
-                )
-                print(result_print)
-                logger.critical(result_print)
-
-            ## Memory leak protect
-            if len(self.id_strList) > 10000:
-                del self.id_strList[:2000]
-
+        
+    
 if(__name__ == '__main__') :
     parser = argparse.ArgumentParser()
     parser.add_argument("--keyword",help="add keyword")
