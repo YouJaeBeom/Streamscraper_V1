@@ -38,12 +38,19 @@ def get_brwoser(keyword):
     for request in driver.requests:
         ## get token, authorization values
         Cookie = str(request.headers['Cookie']).replace(" ","").split(";")
+        Headers = request.headers
+        
         try:
             x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
             x_guest_token =  x_guest_token.replace("gt=","")
-            authorization = request.headers['authorization']
+            
+            
+            authorization = Headers['authorization']
+            x_csrf_token = Headers['x-csrf-token']
+            
         except :
             continue
+        
         if x_guest_token != None and authorization != None:
             break
 
@@ -51,8 +58,11 @@ def get_brwoser(keyword):
     ## browser close
     driver.close()
     driver.quit()
-
-    return x_guest_token, authorization
+    
+    
+    
+    
+    return x_guest_token, authorization, x_csrf_token
 
 
     

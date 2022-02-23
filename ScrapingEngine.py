@@ -32,7 +32,7 @@ from selenium.webdriver.firefox.options import Options
 
 class ScrapingEngine(object):
     
-    def __init__(self, keyword, index_num, authorization, x_guest_token):
+    def __init__(self, keyword, index_num, x_guest_token, authorization, x_csrf_token):
         self.keyword = keyword
         self.index_num = index_num
 
@@ -42,8 +42,9 @@ class ScrapingEngine(object):
         self.x_twitter_client_language = self.language_types[int(self.index_num)]
 
         ## Setting authorization keysets
-        self.authorization = authorization
         self.x_guest_token = x_guest_token 
+        self.authorization = authorization
+        self.x_csrf_token = x_csrf_token
 
         ## Setting init  
         self.cursor = None
@@ -70,14 +71,13 @@ class ScrapingEngine(object):
         while (True):
             ## setting header
             self.headers = {
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
                     'Accept': '*/*',
                     'Accept-Language': self.accept_language,
                     #'Accept-Encoding': 'gzip, deflate, br',
                     'x-guest-token': self.x_guest_token,
                     'x-twitter-client-language': self.x_twitter_client_language,
                     'x-twitter-active-user': 'yes',
-                    'x-csrf-token': 'c931c4b02e64508ab1dd9b61c19c4614',
+                    'x-csrf-token': str(self.x_csrf_token),
                     'Sec-Fetch-Dest': 'empty',
                     'Sec-Fetch-Mode': 'cors',
                     'Sec-Fetch-Site': 'same-origin',
@@ -86,6 +86,7 @@ class ScrapingEngine(object):
                     'Connection': 'keep-alive',
                     'TE': 'trailers',
             }
+            
             ## setting parameters
             self.params = (
                     ('include_profile_interstitial_type', '1'),
@@ -127,13 +128,12 @@ class ScrapingEngine(object):
                         params=self.params,
                         timeout=3
                         )
-                
                 self.response_json = self.response.json()
                 self.get_tweets(self.response_json)
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
                 print(self.index_num,ex)
-                self.x_guest_token, self.authorization = AuthenticationManager.get_brwoser(self.keyword)
+                self.x_guest_token, self.authorization, self.x_csrf_token  = AuthenticationManager.get_brwoser(self.keyword)
                 continue
 
     def get_tweets(self,response_json):
@@ -162,7 +162,7 @@ class ScrapingEngine(object):
                 if self.now < self.created_at:
                     self.id_strList.append(tweet['id_str'])
                     self.totalcount = self.totalcount + 1
-                    print(tweet)
+                    #print(tweet)
                     try:                    
                         self.producer.send("bts", json.dumps(tweet).encode('utf-8'))
                         self.producer.flush()
@@ -195,10 +195,14 @@ if(__name__ == '__main__') :
     parser = argparse.ArgumentParser()
     parser.add_argument("--keyword",help="add keyword")
     parser.add_argument("--index_num", help="add index number max(32)")
-    parser.add_argument("--authorization", help="add init authorization")
     parser.add_argument("--x_guest_token", help="add init x_guest_token")
+    parser.add_argument("--authorization", help="add init authorization")
+    parser.add_argument("--x_csrf_token", help="add init x_csrf_token")
+    
+    
+    
     args = parser.parse_args()
     
-    streamscraper = ScrapingEngine(args.keyword, args.index_num, args.authorization, args.x_guest_token)
+    streamscraper = ScrapingEngine(args.keyword, args.index_num, args.x_guest_token, args.authorization, args.x_csrf_token)
     streamscraper.start_scraping()
 

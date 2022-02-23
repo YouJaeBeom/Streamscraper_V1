@@ -7,9 +7,9 @@ import AuthenticationManager
 
 
 # This block of code enables us to call the script from command line.
-def execute(keyword,index_num,authorization,x_guest_token):
+def execute(keyword,index_num,x_guest_token, authorization, x_csrf_token):
     try:
-        command = "python ScrapingEngine.py --keyword '%s' --index_num '%s' --authorization '%s' --x_guest_token '%s'"%(keyword,index_num,authorization,x_guest_token)
+        command = "python ScrapingEngine.py --keyword '%s' --index_num '%s'  --x_guest_token '%s' --authorization '%s' --x_csrf_token '%s' "%(keyword, index_num, x_guest_token, authorization, x_csrf_token)
         print(command)
         os.system(command)
     except Exception as ex:
@@ -19,7 +19,7 @@ def execute(keyword,index_num,authorization,x_guest_token):
 
 if __name__ == '__main__':
     start=time.time()
-    numOflan = 34
+    numOflan = 1
     with open('list.txt', 'r') as f:
         keyword_list = f.read().split(',')
 
@@ -29,9 +29,9 @@ if __name__ == '__main__':
         for index in range(0,numOflan+1):
             index_num.append(index)
 
-        x_guest_token, authorization = AuthenticationManager.get_brwoser(keyword)
+        x_guest_token, authorization, x_csrf_token = AuthenticationManager.get_brwoser(keyword)
 
         process_pool = multiprocessing.Pool(processes = numOflan)
-        process_pool.starmap(execute, zip(repeat(keyword),index_num,repeat(authorization),repeat(x_guest_token)))
+        process_pool.starmap(execute, zip(repeat(keyword), index_num, repeat(x_guest_token) ,  repeat(authorization), repeat(x_csrf_token) ))
 
 print("-------%s seconds -----"%(time.time()-start))
