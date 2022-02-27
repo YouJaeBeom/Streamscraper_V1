@@ -1,0 +1,1 @@
+gl,gu,el,nl,no,da,de,ru,ro,mr,msa,eu,vi,bn,bg,sr,sv,es,sk,ar,ar-x-fm,ga,en,en-GB,ur,uk,it,id,ja,zh-cn,zh-tw,cs,ca,kn,hr,ta,th,tr,fa,pt,pl,fr,fi,fil,ko,hu,he,hi

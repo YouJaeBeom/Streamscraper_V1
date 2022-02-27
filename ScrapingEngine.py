@@ -29,14 +29,15 @@ from selenium.webdriver.firefox.options import Options
 
 class ScrapingEngine(object):
     
-    def __init__(self, keyword, index_num, x_guest_token, authorization, x_csrf_token):
+    def __init__(self, keyword, process_number, x_guest_token, authorization, x_csrf_token):
         self.keyword = keyword
-        self.index_num = index_num
+        self.process_number = process_number
 
         ## Setting Language type
-        self.language_types =["en","ar","bn","cs","da","de","el","es","fa","fi","fil","fr","he","hi","hu","id","it","ja","ko","msa","nl","no","pl","pt","ro","ru","sv","th","tr","uk","ur","vi","zh-cn","zh-tw"]
-        self.accept_language = self.language_types[int(self.index_num)]
-        self.x_twitter_client_language = self.language_types[int(self.index_num)]
+        with open('language_list.txt', 'r') as f:
+            self.language_list = f.read().split(',')
+        self.accept_language = self.language_list[int(self.process_number)]
+        self.x_twitter_client_language = self.language_list[int(self.process_number)]
 
         ## Setting authorization keysets
         self.x_guest_token = x_guest_token 
@@ -128,7 +129,8 @@ class ScrapingEngine(object):
                 self.get_tweets(self.response_json)
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
-                print(self.index_num,ex)
+                logger.critical(self.process_number,self.x_twitter_client_language,ex)
+                print(self.process_number,self.x_twitter_client_language,ex)
                 self.x_guest_token, self.authorization, self.x_csrf_token  = AuthenticationManager.get_brwoser(self.keyword)
                 continue
 
@@ -161,7 +163,8 @@ class ScrapingEngine(object):
                     try:                    
                         self.producer.send("streamscraper", json.dumps(tweet).encode('utf-8'))
                         self.producer.flush()
-                    except Exception as e:
+                    except Exception as ex:
+                        logger.critical(ex)
                         print(e)
                     
         self.refresh_requests_setting()
@@ -189,7 +192,7 @@ class ScrapingEngine(object):
 if(__name__ == '__main__') :
     parser = argparse.ArgumentParser()
     parser.add_argument("--keyword",help="add keyword")
-    parser.add_argument("--index_num", help="add index number max(32)")
+    parser.add_argument("--process_number", help="add process_number")
     parser.add_argument("--x_guest_token", help="add init x_guest_token")
     parser.add_argument("--authorization", help="add init authorization")
     parser.add_argument("--x_csrf_token", help="add init x_csrf_token")
@@ -198,6 +201,6 @@ if(__name__ == '__main__') :
     
     args = parser.parse_args()
     
-    streamscraper = ScrapingEngine(args.keyword, args.index_num, args.x_guest_token, args.authorization, args.x_csrf_token)
+    streamscraper = ScrapingEngine(args.keyword, args.process_number, args.x_guest_token, args.authorization, args.x_csrf_token)
     streamscraper.start_scraping()
 
