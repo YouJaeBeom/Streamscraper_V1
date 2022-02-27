@@ -6,17 +6,13 @@ import time
 from datetime import datetime, timedelta
 import maya
 from pytz import timezone
-
 KST = timezone('Asia/Seoul')
 
 # 로그 생성
 import logging
 logger = logging.getLogger()
-# 로그의 출력 기준 설정
 logger.setLevel(logging.CRITICAL)
-# log 출력 형식
 formatter = logging.Formatter('%(asctime)s - %(message)s')
-# log를 파일에 출력
 file_handler = logging.FileHandler('log.txt')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -26,6 +22,7 @@ import GetCursor
 
 ## set kafka
 from kafka import KafkaProducer
+
 ## selenium import setting
 from seleniumwire import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -73,7 +70,6 @@ class ScrapingEngine(object):
             self.headers = {
                     'Accept': '*/*',
                     'Accept-Language': self.accept_language,
-                    #'Accept-Encoding': 'gzip, deflate, br',
                     'x-guest-token': self.x_guest_token,
                     'x-twitter-client-language': self.x_twitter_client_language,
                     'x-twitter-active-user': 'yes',
@@ -142,11 +138,10 @@ class ScrapingEngine(object):
         Entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/entities
         Extended entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/extended-entities
         Geo object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
-        """
+        """ 
+        ## setup
         self.response_json = response_json
         self.tweets = self.response_json['globalObjects']['tweets'].values()
-        
-        ## setup
         self.dup_count = 0
         self.now = (datetime.now().astimezone(KST) - timedelta(minutes=1))
         
@@ -164,7 +159,7 @@ class ScrapingEngine(object):
                     self.totalcount = self.totalcount + 1
                     #print(tweet)
                     try:                    
-                        self.producer.send("bts", json.dumps(tweet).encode('utf-8'))
+                        self.producer.send("streamscraper", json.dumps(tweet).encode('utf-8'))
                         self.producer.flush()
                     except Exception as e:
                         print(e)
