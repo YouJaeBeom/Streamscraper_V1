@@ -109,7 +109,7 @@ class ScrapingEngine(object):
                     ('simple_quoted_tweet', 'true'),
                     ('q', self.keyword+" -is:retweet"),
                     ('tweet_search_mode', 'live'),
-                    ('count', '40'),
+                    ('count', '200'),
                     ('query_source', 'typed_query'),
                     ('pc', '1'),
                     ('spelling_corrections', '1'),
@@ -123,7 +123,7 @@ class ScrapingEngine(object):
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
                         params=self.params,
-                        timeout=3
+                        timeout=2
                         )
                 self.response_json = self.response.json()
                 self.get_tweets(self.response_json)
@@ -165,10 +165,13 @@ class ScrapingEngine(object):
                         self.producer.flush()
                     except Exception as ex:
                         logger.critical(ex)
-                        print(e)
+                        print(ex)
                     
         self.refresh_requests_setting()
-        #self.next_requests_setting()
+        
+        ## Memory leak protect
+        if len(self.id_strList) > 10000:
+            del self.id_strList[:2000]
         
     def refresh_requests_setting(self):
         self.cursor = GetCursor.get_refresh_cursor(self.response_json)
@@ -183,9 +186,7 @@ class ScrapingEngine(object):
         print(result_print)
         logger.critical(result_print)
         
-        ## Memory leak protect
-        if len(self.id_strList) > 10000:
-            del self.id_strList[:2000]
+        
         
         
     
@@ -196,8 +197,6 @@ if(__name__ == '__main__') :
     parser.add_argument("--x_guest_token", help="add init x_guest_token")
     parser.add_argument("--authorization", help="add init authorization")
     parser.add_argument("--x_csrf_token", help="add init x_csrf_token")
-    
-    
     
     args = parser.parse_args()
     
