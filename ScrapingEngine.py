@@ -32,7 +32,12 @@ class ScrapingEngine(object):
     def __init__(self, keyword, process_number, x_guest_token, authorization, x_csrf_token):
         self.keyword = keyword
         self.process_number = process_number
-
+        
+        #port=[9051,9061,9071,9081]
+        port=[9050,9060,9070,9080]
+        self.port = port[int(self.process_number)%4]
+        print(self.port)
+        
         ## Setting Language type
         with open('language_list.txt', 'r') as f:
             self.language_list = f.read().split(',')
@@ -123,7 +128,10 @@ class ScrapingEngine(object):
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
                         params=self.params,
-                        timeout=2
+                        timeout=2,
+                        proxies={
+                            "http": "socks5h://localhost:"+str(self.port)
+                            }
                         )
                 self.response_json = self.response.json()
                 self.get_tweets(self.response_json)
