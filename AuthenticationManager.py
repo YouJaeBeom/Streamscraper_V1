@@ -43,8 +43,8 @@ def get_brwoser(keyword):
             x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
             x_guest_token =  x_guest_token.replace("gt=","")
 
-            personalization_id = [personalization_id for personalization_id in Cookie if "gt=" in personalization_id][0]
-            personalization_id =  personalization_id.replace("gt=","")
+            personalization_id = [personalization_id for personalization_id in Cookie if "personalization_id=" in personalization_id][0]
+            personalization_id =  personalization_id.replace("personalization_id=","")
             
             authorization = Headers['authorization']
             x_csrf_token = Headers['x-csrf-token']

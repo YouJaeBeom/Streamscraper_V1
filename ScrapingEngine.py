@@ -74,7 +74,7 @@ class ScrapingEngine(object):
                     'x-guest-token': self.x_guest_token,
                     'x-twitter-client-language': self.x_twitter_client_language,
                     'x-twitter-active-user': 'yes',
-                    'x-csrf-token': str(self.x_csrf_token),
+                    #'x-csrf-token': str(self.x_csrf_token),
                     'Sec-Fetch-Dest': 'empty',
                     'Sec-Fetch-Mode': 'cors',
                     'Sec-Fetch-Site': 'same-origin',
