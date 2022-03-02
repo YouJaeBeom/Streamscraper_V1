@@ -36,7 +36,6 @@ class ScrapingEngine(object):
         #port=[9051,9061,9071,9081]
         port=[9050,9060,9070,9080]
         self.port = port[int(self.process_number)%4]
-        print(self.port)
         
         ## Setting Language type
         with open('language_list.txt', 'r') as f:
