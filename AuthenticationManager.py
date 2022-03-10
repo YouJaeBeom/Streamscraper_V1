@@ -33,7 +33,10 @@ def get_brwoser(keyword):
     driver.get(url)
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     time.sleep(2)
-
+    
+    authorization = ""
+    personalization_id = ""
+    
     ## get Cookie, Authorization
     for request in driver.requests:
         ## get token, authorization values
@@ -46,9 +49,7 @@ def get_brwoser(keyword):
             personalization_id = [personalization_id for personalization_id in Cookie if "personalization_id=" in personalization_id][0]
             personalization_id =  personalization_id.replace("personalization_id=","")
             
-            authorization = Headers['authorization']
-            x_csrf_token = Headers['x-csrf-token']
-            
+            authorization = Headers['authorization']    
         except :
             continue
         
@@ -62,7 +63,7 @@ def get_brwoser(keyword):
     
     
     
-    return x_guest_token, authorization, x_csrf_token
+    return x_guest_token, authorization
 
 
     
