@@ -29,13 +29,13 @@ from selenium.webdriver.firefox.options import Options
 
 class ScrapingEngine(object):
     
-    def __init__(self, keyword, process_number, x_guest_token, authorization, x_csrf_token):
+    def __init__(self, keyword, process_number, x_guest_token, authorization):
         self.keyword = keyword
         self.process_number = process_number
         
-        #port=[9051,9061,9071,9081]
-        port=[9050,9060,9070,9080]
-        self.port = port[int(self.process_number)%4]
+        """port=[9051,9061,9071,9081]
+        #port=[9050,9060,9070,9080]
+        self.port = port[int(self.process_number)%4]"""
         
         ## Setting Language type
         with open('language_list.txt', 'r') as f:
@@ -46,7 +46,6 @@ class ScrapingEngine(object):
         ## Setting authorization keysets
         self.x_guest_token = x_guest_token 
         self.authorization = authorization
-        self.x_csrf_token = x_csrf_token
 
         ## Setting init  
         self.cursor = None
@@ -78,7 +77,6 @@ class ScrapingEngine(object):
                     'x-guest-token': self.x_guest_token,
                     'x-twitter-client-language': self.x_twitter_client_language,
                     'x-twitter-active-user': 'yes',
-                    #'x-csrf-token': str(self.x_csrf_token),
                     'Sec-Fetch-Dest': 'empty',
                     'Sec-Fetch-Mode': 'cors',
                     'Sec-Fetch-Site': 'same-origin',
@@ -123,7 +121,7 @@ class ScrapingEngine(object):
             
             try:
                 ## call API with header, parameters
-                self.response = requests.get(
+                """self.response = requests.get(
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
                         params=self.params,
@@ -131,14 +129,21 @@ class ScrapingEngine(object):
                         proxies={
                             "http": "socks5h://localhost:"+str(self.port)
                             }
+                        )"""
+                self.response = requests.get(
+                        'https://twitter.com/i/api/2/search/adaptive.json', 
+                        headers=self.headers,
+                        params=self.params,
+                        timeout=2
                         )
+                
                 self.response_json = self.response.json()
                 self.get_tweets(self.response_json)
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
                 logger.critical(self.process_number,self.x_twitter_client_language,ex)
                 print(self.process_number,self.x_twitter_client_language,ex)
-                self.x_guest_token, self.authorization, self.x_csrf_token  = AuthenticationManager.get_brwoser(self.keyword)
+                self.x_guest_token, self.authorization  = AuthenticationManager.get_brwoser(self.keyword)
                 continue
 
     def get_tweets(self,response_json):
@@ -152,7 +157,6 @@ class ScrapingEngine(object):
         self.response_json = response_json
         self.tweets = self.response_json['globalObjects']['tweets'].values()
         self.dup_count = 0
-        self.now = (datetime.now().astimezone(KST) - timedelta(minutes=1))
         
         ## tweets to tweet
         for tweet in self.tweets:
@@ -162,17 +166,21 @@ class ScrapingEngine(object):
 
             # No overlap tweet
             else :           
-                self.created_at = (maya.parse(tweet['created_at']).datetime()).astimezone(KST)
-                if self.now < self.created_at:
+                try:                    
+                    quote_count = tweet['quote_count']
+                except Exception as ex:
+                    pass
+                if quote_count == 0 :    
                     self.id_strList.append(tweet['id_str'])
                     self.totalcount = self.totalcount + 1
-                    #print(tweet)
                     try:                    
                         self.producer.send("streamscraper", json.dumps(tweet).encode('utf-8'))
                         self.producer.flush()
                     except Exception as ex:
                         logger.critical(ex)
                         print(ex)
+                else: 
+                    continue
                     
         self.refresh_requests_setting()
         
@@ -203,10 +211,9 @@ if(__name__ == '__main__') :
     parser.add_argument("--process_number", help="add process_number")
     parser.add_argument("--x_guest_token", help="add init x_guest_token")
     parser.add_argument("--authorization", help="add init authorization")
-    parser.add_argument("--x_csrf_token", help="add init x_csrf_token")
     
     args = parser.parse_args()
     
-    streamscraper = ScrapingEngine(args.keyword, args.process_number, args.x_guest_token, args.authorization, args.x_csrf_token)
+    streamscraper = ScrapingEngine(args.keyword, args.process_number, args.x_guest_token, args.authorization)
     streamscraper.start_scraping()
 
