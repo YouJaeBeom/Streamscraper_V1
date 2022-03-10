@@ -7,13 +7,13 @@ import AuthenticationManager
 
 
 # This block of code enables us to call the script from command line.
-def execute(keyword,process_number,x_guest_token, authorization, x_csrf_token):
+def execute(keyword,process_number,x_guest_token, authorization):
     try:
-        command = "python ScrapingEngine.py --keyword '%s' --process_number '%s'  --x_guest_token '%s' --authorization '%s' --x_csrf_token '%s' "%(keyword, process_number, x_guest_token, authorization, x_csrf_token)
+        command = "python ScrapingEngine.py --keyword '%s' --process_number '%s'  --x_guest_token '%s' --authorization '%s' "%(keyword, process_number, x_guest_token, authorization)
         print(command)
         os.system(command)
     except Exception as ex:
-        print(ex)
+        pass
 
 
 
@@ -36,9 +36,9 @@ if __name__ == '__main__':
     
     for keyword in (keyword_list):
         # Creating the tuple of all the processes
-        x_guest_token, authorization, x_csrf_token = AuthenticationManager.get_brwoser(keyword)
+        x_guest_token, authorization = AuthenticationManager.get_brwoser(keyword)
 
         process_pool = multiprocessing.Pool(processes = num_of_process)
-        process_pool.starmap(execute, zip(repeat(keyword), num_of_process_list, repeat(x_guest_token) ,  repeat(authorization), repeat(x_csrf_token) ))
+        process_pool.starmap(execute, zip(repeat(keyword), num_of_process_list, repeat(x_guest_token) ,  repeat(authorization) ))
 
 print("-------%s seconds -----"%(time.time()-start))
