@@ -49,7 +49,6 @@ class ScrapingEngine(object):
 
         ## Setting init  
         self.cursor = None
-        self.id_strList =[]
         self.totalcount = 0
 
         ## Setting base url
@@ -141,8 +140,8 @@ class ScrapingEngine(object):
                 self.get_tweets(self.response_json)
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
-                logger.critical(self.process_number,self.x_twitter_client_language,ex)
-                print(self.process_number,self.x_twitter_client_language,ex)
+                logger.critical(self.process_number,ex)
+                print(self.x_twitter_client_language,"HTTP requests error -> call AuthenticationManager \n",ex)
                 self.x_guest_token, self.authorization  = AuthenticationManager.get_brwoser(self.keyword)
                 continue
 
@@ -156,47 +155,33 @@ class ScrapingEngine(object):
         ## setup
         self.response_json = response_json
         self.tweets = self.response_json['globalObjects']['tweets'].values()
-        self.dup_count = 0
         
         ## tweets to tweet
-        for tweet in self.tweets:
-            ## overlap tweet
-            if tweet['id_str'] in self.id_strList:
-                self.dup_count = self.dup_count + 1
-
-            # No overlap tweet
-            else :           
+        for tweet in self.tweets:  
+            try:                    
+                quote_count = tweet['quote_count']
+            except Exception as ex:
+                pass
+            if quote_count == 0 :    
+                self.totalcount = self.totalcount + 1
                 try:                    
-                    quote_count = tweet['quote_count']
+                    self.producer.send("streamscraper", json.dumps(tweet).encode('utf-8'))
+                    self.producer.flush()
                 except Exception as ex:
-                    pass
-                if quote_count == 0 :    
-                    self.id_strList.append(tweet['id_str'])
-                    self.totalcount = self.totalcount + 1
-                    try:                    
-                        self.producer.send("streamscraper", json.dumps(tweet).encode('utf-8'))
-                        self.producer.flush()
-                    except Exception as ex:
-                        logger.critical(ex)
-                        print(ex)
-                else: 
-                    continue
+                    logger.critical(ex)
+                    print(ex)
+            else: 
+                continue
                     
         self.refresh_requests_setting()
-        
-        ## Memory leak protect
-        if len(self.id_strList) > 10000:
-            del self.id_strList[:2000]
         
     def refresh_requests_setting(self):
         self.cursor = GetCursor.get_refresh_cursor(self.response_json)
         
-        result_print = "lan_type={0:<10}|keyword={1:<20}|tweet_count={2:<10}|dropduplicate_count={3:<10}|tweet_listSize={4:<10}|".format(
+        result_print = "lan_type={0:<10}|keyword={1:<20}|tweet_count={2:<10}|".format(
                 self.accept_language,
                 self.keyword,
-                len(self.id_strList),
-                self.totalcount,
-                sys.getsizeof(self.id_strList)
+                self.totalcount
         )
         print(result_print)
         logger.critical(result_print)
