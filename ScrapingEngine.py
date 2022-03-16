@@ -136,7 +136,13 @@ class ScrapingEngine(object):
                         timeout=2
                         )
                 self.response_json = self.response.json()
-                self.get_tweets(self.response_json)
+                #self.get_tweets(self.response_json)
+                try:
+                    #self.response_json = self.response_json
+                    self.tweets = self.response_json['globalObjects']['tweets'].values()
+                    self.get_tweets(self.tweets)
+                except Exception as ex:
+                    continue
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
                 logger.critical(self.process_number,ex)
@@ -144,7 +150,7 @@ class ScrapingEngine(object):
                 self.x_guest_token, self.authorization  = AuthenticationManager.get_brwoser(self.keyword)
                 continue
 
-    def get_tweets(self,response_json):
+    def get_tweets(self,tweets):
         """
         Tweet object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/tweet
         Entities object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/entities
@@ -152,11 +158,10 @@ class ScrapingEngine(object):
         Geo object description : https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/object-model/geo
         """ 
         ## setup
-        self.response_json = response_json
-        self.tweets = self.response_json['globalObjects']['tweets'].values()
-        
+        tweets = self.tweets
+            
         ## tweets to tweet
-        for tweet in self.tweets:  
+        for tweet in tweets:  
             try:                    
                 quote_count = tweet['quote_count']
             except Exception as ex:

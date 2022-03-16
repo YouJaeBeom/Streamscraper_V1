@@ -50,11 +50,12 @@ def get_brwoser(keyword):
             personalization_id =  personalization_id.replace("personalization_id=","")
             
             authorization = Headers['authorization']    
+            if x_guest_token != None and authorization != None:
+                break
         except :
             continue
         
-        if x_guest_token != None and authorization != None:
-            break
+        
 
     ## browser close
     driver.close()
