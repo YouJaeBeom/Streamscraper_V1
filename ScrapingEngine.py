@@ -135,7 +135,7 @@ class ScrapingEngine(object):
                         params=self.params,
                         timeout=2
                         )
-                
+                print(self.x_twitter_client_language,self.response.headers)
                 self.response_json = self.response.json()
                 self.get_tweets(self.response_json)
             except Exception as ex:
