@@ -33,9 +33,9 @@ class ScrapingEngine(object):
         self.keyword = keyword
         self.process_number = process_number
         
-        """port=[9051,9061,9071,9081]
+        port=[9051,9061,9071,9081]
         #port=[9050,9060,9070,9080]
-        self.port = port[int(self.process_number)%4]"""
+        self.port = port[int(self.process_number)%4]
         
         ## Setting Language type
         with open('language_list.txt', 'r') as f:
@@ -120,7 +120,7 @@ class ScrapingEngine(object):
             
             try:
                 ## call API with header, parameters
-                """self.response = requests.get(
+                self.response = requests.get(
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
                         params=self.params,
@@ -128,13 +128,13 @@ class ScrapingEngine(object):
                         proxies={
                             "http": "socks5h://localhost:"+str(self.port)
                             }
-                        )"""
-                self.response = requests.get(
+                        )
+                """self.response = requests.get(
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
                         params=self.params,
                         timeout=2
-                        )
+                        )"""
                 self.response_json = self.response.json()
                 #self.get_tweets(self.response_json)
                 try:
@@ -142,12 +142,27 @@ class ScrapingEngine(object):
                     self.tweets = self.response_json['globalObjects']['tweets'].values()
                     self.get_tweets(self.tweets)
                 except Exception as ex:
+                    result_print = "lan_type={0:<10}|keyword={1:<20}|paring error| error={2}|".format(
+                        self.process_number,
+                        self.keyword,
+                        ex
+                    )
+                    logger.critical(result_print)
+                    print(result_print)
                     continue
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
-                logger.critical(self.process_number,ex)
-                print(self.x_twitter_client_language,"HTTP requests error -> call AuthenticationManager \n",ex)
-                self.x_guest_token, self.authorization  = AuthenticationManager.get_brwoser(self.keyword)
+                result_print = "lan_type={0:<10}|keyword={1:<20}|change Cookie&Authorization| error={2}|".format(
+                    self.process_number,
+                    self.keyword,
+                    ex
+                )
+                logger.critical(result_print)
+                print(result_print)
+                while True:
+                    self.x_guest_token, self.authorization  = AuthenticationManager.get_brwoser(self.keyword,self.process_number)
+                    if self.x_guest_token != None and self.authorization != None:
+                        break
                 continue
 
     def get_tweets(self,tweets):
@@ -183,11 +198,11 @@ class ScrapingEngine(object):
         self.cursor = GetCursor.get_refresh_cursor(self.response_json)
         
         result_print = "lan_type={0:<10}|keyword={1:<20}|tweet_count={2:<10}|".format(
-                self.accept_language,
+                self.process_number,
                 self.keyword,
                 self.totalcount
         )
-        print(result_print)
+        #print(result_print)
         logger.critical(result_print)
         
         

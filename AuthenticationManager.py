@@ -14,15 +14,14 @@ def get_profile():
     """
     Firefox browser settings
     """
-    print("Firefox browser settings")
     profile = webdriver.FirefoxProfile()
     profile.set_preference("browser.privatebrowsing.autostart", True)
 
-def get_brwoser(keyword):
+def get_brwoser(keyword,process_number):
     """
     Get Cookie, Authorization through Firefox browser
     """
-    print("Get Authorization keyset through Firefox browser")
+    
     ## drowser setting
     options = Options()
     options.headless = True
@@ -34,9 +33,6 @@ def get_brwoser(keyword):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     time.sleep(2)
     
-    authorization = ""
-    personalization_id = ""
-    
     ## get Cookie, Authorization
     for request in driver.requests:
         ## get token, authorization values
@@ -44,27 +40,16 @@ def get_brwoser(keyword):
         Headers = request.headers
         try:
             x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
-            x_guest_token =  x_guest_token.replace("gt=","")
-
-            personalization_id = [personalization_id for personalization_id in Cookie if "personalization_id=" in personalization_id][0]
-            personalization_id =  personalization_id.replace("personalization_id=","")
-            
-            authorization = Headers['authorization']    
-            if x_guest_token != None and authorization != None:
-                break
+            x_guest_token =  str(x_guest_token.replace("gt=",""))
+            authorization = str(Headers['authorization'])    
+            if x_guest_token != None and authorization != None :
+                ## browser close
+                driver.close()
+                driver.quit()
+                return x_guest_token, authorization
         except :
-            continue
-        
-        
-
-    ## browser close
+            pass
+    
     driver.close()
     driver.quit()
-    
-    
-    
-    
-    return x_guest_token, authorization
-
-
-    
+    return None, None
