@@ -7,6 +7,8 @@ from datetime import datetime, timedelta
 import maya
 from pytz import timezone
 KST = timezone('Asia/Seoul')
+from stem import Signal
+from stem.control import Controller
 
 # 로그 생성
 import logging
@@ -60,6 +62,11 @@ class ScrapingEngine(object):
     def set_search_url(self):
         self.url = self.base_url + self.keyword +"&src=typed_query&f=live"
         return self.url
+
+    def renew_tor_ip(port_num):
+        with Controller.from_port(port = port_num) as controller:
+            controller.authenticate(password="MyStr")
+            controller.signal(Signal.NEWNYM)
 
     def start_scraping(self):
         ## start tweet collection function 
@@ -152,6 +159,7 @@ class ScrapingEngine(object):
                     continue
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
+                self.renew_tor_ip(self.port)
                 result_print = "lan_type={0:<10}|keyword={1:<20}|change Cookie&Authorization| error={2}|".format(
                     self.process_number,
                     self.keyword,
@@ -202,7 +210,7 @@ class ScrapingEngine(object):
                 self.keyword,
                 self.totalcount
         )
-        #print(result_print)
+        print(result_print)
         logger.critical(result_print)
         
         
