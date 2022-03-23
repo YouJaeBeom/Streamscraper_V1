@@ -23,6 +23,7 @@ def get_brwoser(keyword,process_number):
     """
     
     ## drowser setting
+    time.sleep(2)
     options = Options()
     options.headless = True
     driver = webdriver.Firefox(firefox_profile=get_profile(), options=options)
