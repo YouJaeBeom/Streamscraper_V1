@@ -7,8 +7,7 @@ from datetime import datetime, timedelta
 import maya
 from pytz import timezone
 KST = timezone('Asia/Seoul')
-from stem import Signal
-from stem.control import Controller
+
 
 # 로그 생성
 import logging
@@ -35,9 +34,6 @@ class ScrapingEngine(object):
         self.keyword = keyword
         self.process_number = process_number
         
-        port=[9051,9061,9071,9081]
-        #port=[9050,9060,9070,9080]
-        self.port = port[int(self.process_number)%4]
         
         ## Setting Language type
         with open('language_list.txt', 'r') as f:
@@ -62,11 +58,6 @@ class ScrapingEngine(object):
     def set_search_url(self):
         self.url = self.base_url + self.keyword +"&src=typed_query&f=live"
         return self.url
-
-    def renew_tor_ip(self, port_num):
-        with Controller.from_port(port = port_num) as controller:
-            controller.authenticate(password="MyStr")
-            controller.signal(Signal.NEWNYM)
 
     def start_scraping(self):
         ## start tweet collection function 
@@ -131,21 +122,11 @@ class ScrapingEngine(object):
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
                         params=self.params,
-                        timeout=2,
-                        proxies={
-                            "http": "socks5h://localhost:"+str(self.port)
-                            }
-                        )
-                """self.response = requests.get(
-                        'https://twitter.com/i/api/2/search/adaptive.json', 
-                        headers=self.headers,
-                        params=self.params,
                         timeout=2
-                        )"""
+                        )
                 self.response_json = self.response.json()
-                #self.get_tweets(self.response_json)
+                
                 try:
-                    #self.response_json = self.response_json
                     self.tweets = self.response_json['globalObjects']['tweets'].values()
                     self.get_tweets(self.tweets)
                 except Exception as ex:
@@ -159,7 +140,6 @@ class ScrapingEngine(object):
                     continue
             except Exception as ex:
                 ## If API is restricted, request to change Cookie and Authorization again
-                self.renew_tor_ip(self.port)
                 result_print = "lan_type={0:<10}|keyword={1:<20}|change Cookie&Authorization| error={2}|".format(
                     self.process_number,
                     self.keyword,
