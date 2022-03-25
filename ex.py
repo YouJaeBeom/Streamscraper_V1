@@ -21,29 +21,32 @@ def get_brwoser(keyword,process_number):
     """
     Get Cookie, Authorization through Firefox browser
     """
-    
+
     ## drowser setting
-    time.sleep(2)
     options = Options()
     options.headless = True
     driver = webdriver.Firefox(firefox_profile=get_profile(), options=options)
 
-    ## brwoser execute
-    url = "https://twitter.com/search?q="+keyword+"&src=typed_query&f=live"
-    driver.get(url)
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-    time.sleep(2)
-    
+    try:
+        ## brwoser execute
+        url = "https://twitter.com/search?q="+keyword+"&src=typed_query&f=live"
+        driver.get(url)
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(3)
+    except Exception as ex:
+        print(ex)
+
     ## get Cookie, Authorization
     for request in driver.requests:
         ## get token, authorization values
         Cookie = str(request.headers['Cookie']).replace(" ","").split(";")
         Headers = request.headers
-        print(request)
+        print(request.url)
+        print(Headers)
         try:
             x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
             x_guest_token =  str(x_guest_token.replace("gt=",""))
-            authorization = str(Headers['authorization'])    
+            authorization = str(Headers['authorization'])
             if x_guest_token != None and authorization != None :
                 ## browser close
                 driver.close()
@@ -51,7 +54,11 @@ def get_brwoser(keyword,process_number):
                 return x_guest_token, authorization
         except :
             pass
-    
+
     driver.close()
     driver.quit()
     return None, None
+
+if __name__ == '__main__':
+    x_guest_token, authorization = get_brwoser("russia",3)
+    print(x_guest_token, authorization)
