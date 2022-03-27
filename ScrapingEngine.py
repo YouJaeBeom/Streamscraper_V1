@@ -37,7 +37,7 @@ class ScrapingEngine(object):
         
         ## Setting Language type
         with open('language_list.txt', 'r') as f:
-            language_list_txt = f.readlines()
+            language_list_txt = f.read().split(",")
         self.language_list =[]
         
         for language in language_list_txt:

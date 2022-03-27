@@ -24,14 +24,13 @@ if __name__ == '__main__':
         query_list = f.read().split(',')
     
     with open('language_list.txt', 'r') as f:
-        language_list_txt = f.readlines()
+        language_list_txt = f.read().split(",")
     language_list =[]
     for language in language_list_txt:
         language=language.strip()
         language_list.append(language)
     
     num_of_process = len(language_list)
-    
     num_of_process_list = []
     for index in range(0,num_of_process):
         num_of_process_list.append(index)
