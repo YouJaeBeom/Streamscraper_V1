@@ -123,7 +123,7 @@ class ScrapingEngine(object):
                         params=self.params,
                         timeout=2
                         )
-                print(self.response.cookies)
+                print(self.response.headers)
                 self.response_json = self.response.json()
                 
                 try:

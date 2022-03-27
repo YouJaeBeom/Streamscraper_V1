@@ -27,3 +27,772 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 
 ###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
 
+1648270525581	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileYnR4Sc"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648270527161	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileYnR4Sc/search.json.mozlz4", (void 0)))
+1648270529246	Marionette	INFO	Listening on port 44965
+1648270529394	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648270529396	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:33435","noProxy":[],"sslProxy":"127.0.0.1:33435"}
+1648270534921	Marionette	INFO	Stopped listening on port 44965
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648382845688	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileuk0SIl"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648382847239	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileuk0SIl/search.json.mozlz4", (void 0)))
+1648382849051	Marionette	INFO	Listening on port 35973
+1648382849282	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648382849285	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:41821","noProxy":[],"sslProxy":"127.0.0.1:41821"}
+1648382854565	Marionette	INFO	Stopped listening on port 35973
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648382866344	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileNTA0Vt"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648382867853	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileNTA0Vt/search.json.mozlz4", (void 0)))
+1648382869732	Marionette	INFO	Listening on port 44591
+1648382869890	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648382869893	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:33401","noProxy":[],"sslProxy":"127.0.0.1:33401"}
+1648382875364	Marionette	INFO	Stopped listening on port 44591
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383520696	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilemvLm1d"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383522159	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilemvLm1d/search.json.mozlz4", (void 0)))
+1648383523970	Marionette	INFO	Listening on port 43237
+1648383524205	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383524207	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:35815","noProxy":[],"sslProxy":"127.0.0.1:35815"}
+1648383528273	Marionette	INFO	Stopped listening on port 43237
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+console.error: PushService: 
+  stateChangeProcessEnqueue: Error transitioning state
+  Message: Error: Data is not ready.
+  Stack:
+    get data@resource://gre/modules/JSONFile.jsm:186:13
+getListeners@resource://gre/modules/PushBroadcastService.jsm:66:5
+observe@resource://gre/modules/AsyncShutdown.jsm:575:16
+
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383532064	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile18mMKW"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383533551	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile18mMKW/search.json.mozlz4", (void 0)))
+1648383535750	Marionette	INFO	Listening on port 45387
+1648383535865	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383535867	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:38383","noProxy":[],"sslProxy":"127.0.0.1:38383"}
+1648383540057	Marionette	INFO	Stopped listening on port 45387
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383543563	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileMFQNnf"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383545402	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileMFQNnf/search.json.mozlz4", (void 0)))
+1648383547610	Marionette	INFO	Listening on port 35573
+1648383547720	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383547722	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:35617","noProxy":[],"sslProxy":"127.0.0.1:35617"}
+1648383552073	Marionette	INFO	Stopped listening on port 35573
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383578788	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileIHE1pE"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383580436	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileIHE1pE/search.json.mozlz4", (void 0)))
+1648383582606	Marionette	INFO	Listening on port 35247
+1648383582789	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383582791	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:42799","noProxy":[],"sslProxy":"127.0.0.1:42799"}
+1648383586793	Marionette	INFO	Stopped listening on port 35247
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_RemoveCorsPreflightCacheEntry) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_RemoveCorsPreflightCacheEntry) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383590582	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileoakWS4"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383591980	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileoakWS4/search.json.mozlz4", (void 0)))
+1648383593985	Marionette	INFO	Listening on port 36265
+1648383594134	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383594136	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:34991","noProxy":[],"sslProxy":"127.0.0.1:34991"}
+1648383598429	Marionette	INFO	Stopped listening on port 36265
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383601913	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileXsXRy0"
+*** You are running in headless mode.
+1648383629272	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileRtCIeC"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383630585	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileRtCIeC/search.json.mozlz4", (void 0)))
+1648383632680	Marionette	INFO	Listening on port 42331
+1648383632866	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383632868	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:36623","noProxy":[],"sslProxy":"127.0.0.1:36623"}
+1648383637247	Marionette	INFO	Stopped listening on port 42331
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383641055	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileEVdKM8"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383642503	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileEVdKM8/search.json.mozlz4", (void 0)))
+Exiting due to channel error.
+Exiting due to channel error.
+1648383692539	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilemn0z3p"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383694096	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilemn0z3p/search.json.mozlz4", (void 0)))
+1648383695871	Marionette	INFO	Listening on port 34485
+1648383696040	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383696042	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:42939","noProxy":[],"sslProxy":"127.0.0.1:42939"}
+1648383700098	Marionette	INFO	Stopped listening on port 34485
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648383703911	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile2lCDwU"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648383705445	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile2lCDwU/search.json.mozlz4", (void 0)))
+1648383707209	Marionette	INFO	Listening on port 38441
+1648383707402	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648383707404	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:43351","noProxy":[],"sslProxy":"127.0.0.1:43351"}
+1648383712093	Marionette	INFO	Stopped listening on port 38441
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648384696609	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileXgsiRU"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648384698154	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileXgsiRU/search.json.mozlz4", (void 0)))
+1648384700179	Marionette	INFO	Listening on port 39749
+1648384700314	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648384700316	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:40479","noProxy":[],"sslProxy":"127.0.0.1:40479"}
+1648384705659	Marionette	INFO	Stopped listening on port 39749
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_InsertNewFocusActionId) Closed channel: cannot send/recv
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_RemoveDynEntriesFromActiveSessionHistoryEntry) Closed channel: cannot send/recv
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_SynchronizeLayoutHistoryState) Closed channel: cannot send/recv
+
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 222 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.LottieWeb.962aef05.js)
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_DiscardBrowsingContext) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Reply_DiscardBrowsingContext) Closed channel: cannot send/recv
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PBrowserBridge::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PContent::Msg_DiscardBrowsingContext) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PContent::Reply_DiscardBrowsingContext) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: RunMessage(msgname=PHttpChannel::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][PContentChild] Error: Send(msgname=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648384728305	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileJJ063y"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648384729656	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileJJ063y/search.json.mozlz4", (void 0)))
+1648384731970	Marionette	INFO	Listening on port 36967
+1648384732175	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648384732177	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:35425","noProxy":[],"sslProxy":"127.0.0.1:35425"}
+1648384737328	Marionette	INFO	Stopped listening on port 36967
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648386444560	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileiWw90h"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648386445971	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileiWw90h/search.json.mozlz4", (void 0)))
+1648386447858	Marionette	INFO	Listening on port 44851
+1648386448073	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648386448075	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:37579","noProxy":[],"sslProxy":"127.0.0.1:37579"}
+1648386453553	Marionette	INFO	Stopped listening on port 44851
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648386458482	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile34Pn6n"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648386460111	Marionette	INFO	Marionette enabled
+1648386460495	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile49yWIC"
+*** You are running in headless mode.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile34Pn6n/search.json.mozlz4", (void 0)))
+1648386462508	Marionette	INFO	Listening on port 44015
+1648386462631	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648386462634	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:37093","noProxy":[],"sslProxy":"127.0.0.1:37093"}
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648386463262	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile49yWIC/search.json.mozlz4", (void 0)))
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1648387003716	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile5wklAT"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387005211	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile5wklAT/search.json.mozlz4", (void 0)))
+1648387007050	Marionette	INFO	Listening on port 45839
+1648387007245	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387007248	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:41145","noProxy":[],"sslProxy":"127.0.0.1:41145"}
+1648387011747	Marionette	INFO	Stopped listening on port 45839
+console.error: PushService: 
+  stateChangeProcessEnqueue: Error transitioning state
+  Message: Error: Data is not ready.
+  Stack:
+    get data@resource://gre/modules/JSONFile.jsm:186:13
+getListeners@resource://gre/modules/PushBroadcastService.jsm:66:5
+observe@resource://gre/modules/AsyncShutdown.jsm:575:16
+
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648387016409	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile8xEe4W"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387018049	Marionette	INFO	Marionette enabled
+1648387018228	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilebfhk3x"
+*** You are running in headless mode.
+1648387018369	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileclg2PP"
+*** You are running in headless mode.
+1648387018529	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileg3U67F"
+*** You are running in headless mode.
+1648387018581	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileAzJjis"
+*** You are running in headless mode.
+1648387018663	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileZ8q3ne"
+*** You are running in headless mode.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile8xEe4W/search.json.mozlz4", (void 0)))
+1648387020828	Marionette	INFO	Listening on port 42101
+1648387021081	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387021084	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:33849","noProxy":[],"sslProxy":"127.0.0.1:33849"}
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387021873	Marionette	INFO	Marionette enabled
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387022343	Marionette	INFO	Marionette enabled
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387022531	Marionette	INFO	Marionette enabled
+1648387022531	Marionette	INFO	Marionette enabled
+1648387022537	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilebfhk3x/search.json.mozlz4", (void 0)))
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileg3U67F/search.json.mozlz4", (void 0)))
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileclg2PP/search.json.mozlz4", (void 0)))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileZ8q3ne/search.json.mozlz4", (void 0)))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileAzJjis/search.json.mozlz4", (void 0)))
+1648387025522	Marionette	INFO	Listening on port 43647
+1648387025553	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387025555	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:42375","noProxy":[],"sslProxy":"127.0.0.1:42375"}
+1648387027080	Marionette	INFO	Listening on port 45901
+1648387027151	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387027153	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:43121","noProxy":[],"sslProxy":"127.0.0.1:43121"}
+1648387027388	Marionette	INFO	Stopped listening on port 42101
+1648387027797	Marionette	INFO	Listening on port 36695
+1648387027887	Marionette	INFO	Listening on port 40785
+1648387027904	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387027985	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:41323","noProxy":[],"sslProxy":"127.0.0.1:41323"}
+1648387027997	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387028003	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:46445","noProxy":[],"sslProxy":"127.0.0.1:46445"}
+1648387028043	Marionette	INFO	Listening on port 36839
+1648387028428	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387028433	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:43255","noProxy":[],"sslProxy":"127.0.0.1:43255"}
+console.log: "RemoteSettingsWorker error: Error: Can't import when we've started shutting down."
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "DoHController: clear state and remove observers"
+1648387031250	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileoWW60m"
+*** You are running in headless mode.
+1648387033638	Marionette	INFO	Stopped listening on port 43647
+1648387034814	Marionette	INFO	Stopped listening on port 45901
+
+###!!! [Child][PContentChild] Error: Send(msgname=PHttpChannel::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+1648387034878	Marionette	INFO	Stopped listening on port 36839
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 691: TypeError: this.tablesData[table] is undefined
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 691: TypeError: this.tablesData[table] is undefined
+JavaScript error: https://abs.twimg.com/responsive-web/client-web/main.ac08d185.js, line 12: Error: ApiError: https://twitter.com/i/api/1.1/attribution/event.json HTTP-0 codes:[1004] trace_ids:[null]
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 70 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/bundle.NetworkInstrument.046e7175.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 198 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.BranchSdk.7bb04ba5.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 167 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/loader.AppModules.e240aae5.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 167 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/loader.AppModules.e240aae5.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 167 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/loader.AppModules.e240aae5.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 167 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/loader.AppModules.e240aae5.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 70 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/bundle.NetworkInstrument.046e7175.js)
+JavaScript error: https://abs.twimg.com/responsive-web/client-web/main.ac08d185.js, line 12: Error: ApiError: https://twitter.com/i/api/1.1/attribution/event.json HTTP-0 codes:[1004] trace_ids:[null]
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 198 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.BranchSdk.7bb04ba5.js)
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387036625	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileoWW60m/search.json.mozlz4", (void 0)))
+1648387039117	Marionette	INFO	Listening on port 37923
+1648387039180	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387039183	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:43411","noProxy":[],"sslProxy":"127.0.0.1:43411"}
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 310 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.emoji.en.90190ce5.js)
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 310 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.emoji.en.90190ce5.js)
+1648387044721	Marionette	INFO	Stopped listening on port 37923
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648387046209	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileFipdsN"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387047891	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileFipdsN/search.json.mozlz4", (void 0)))
+1648387049934	Marionette	INFO	Listening on port 35967
+1648387050145	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387050148	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:42275","noProxy":[],"sslProxy":"127.0.0.1:42275"}
+1648387054657	Marionette	INFO	Stopped listening on port 35967
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1648387260811	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileNiPPYo"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387262248	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileNiPPYo/search.json.mozlz4", (void 0)))
+1648387263945	Marionette	INFO	Listening on port 42903
+1648387264186	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387264188	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:45353","noProxy":[],"sslProxy":"127.0.0.1:45353"}
+1648387268611	Marionette	INFO	Stopped listening on port 42903
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+1648387275424	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile5looFi"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387276928	Marionette	INFO	Marionette enabled
+1648387277498	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileffKxlC"
+*** You are running in headless mode.
+1648387277543	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileuwv8H1"
+1648387277554	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileLLZ21y"
+*** You are running in headless mode.
+*** You are running in headless mode.
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile5looFi/search.json.mozlz4", (void 0)))
+1648387278897	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofiletViGss"
+*** You are running in headless mode.
+1648387280102	Marionette	INFO	Listening on port 44629
+1648387280256	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387280258	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:41467","noProxy":[],"sslProxy":"127.0.0.1:41467"}
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387281747	Marionette	INFO	Marionette enabled
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387281900	Marionette	INFO	Marionette enabled
+1648387281900	Marionette	INFO	Marionette enabled
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387282836	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileffKxlC/search.json.mozlz4", (void 0)))
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileuwv8H1/search.json.mozlz4", (void 0)))
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileLLZ21y/search.json.mozlz4", (void 0)))
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofiletViGss/search.json.mozlz4", (void 0)))
+1648387285675	Marionette	INFO	Listening on port 42145
+1648387285678	Marionette	INFO	Listening on port 39043
+1648387285766	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387285769	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:44203","noProxy":[],"sslProxy":"127.0.0.1:44203"}
+1648387285946	Marionette	INFO	Listening on port 34577
+1648387285985	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387285989	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:41723","noProxy":[],"sslProxy":"127.0.0.1:41723"}
+1648387286070	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387286074	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:34243","noProxy":[],"sslProxy":"127.0.0.1:34243"}
+1648387286120	Marionette	INFO	Stopped listening on port 44629
+console.log: "RemoteSettingsWorker error: Error: Can't import when we've started shutting down."
+1648387286766	Marionette	INFO	Listening on port 44279
+1648387287433	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387287436	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:38455","noProxy":[],"sslProxy":"127.0.0.1:38455"}
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648387289182	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileYwNY3P"
+*** You are running in headless mode.
+1648387290128	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileHFOqgS"
+*** You are running in headless mode.
+1648387292956	Marionette	INFO	Stopped listening on port 39043
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 691: TypeError: this.tablesData[table] is undefined
+console.log: "RemoteSettingsWorker error: Error: Can't import when we've started shutting down."
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "DoHController: clear state and remove observers"
+1648387294048	Marionette	INFO	Stopped listening on port 44279
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 691: TypeError: this.tablesData[table] is undefined
+1648387294269	Marionette	INFO	Stopped listening on port 42145
+JavaScript error: https://twitter.com/search?q=russia&src=typed_query&f=live, line 131: ChunkLoadError: Loading chunk 198 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.BranchSdk.7bb04ba5.js)
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 691: TypeError: this.tablesData[table] is undefined
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387294606	Marionette	INFO	Marionette enabled
+1648387294733	Marionette	INFO	Stopped listening on port 34577
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 691: TypeError: this.tablesData[table] is undefined
+console.log: "RemoteSettingsWorker error: Error: Can't import when we've started shutting down."
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648387295802	Marionette	INFO	Marionette enabled
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileYwNY3P/search.json.mozlz4", (void 0)))
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileHFOqgS/search.json.mozlz4", (void 0)))
+1648387297792	Marionette	INFO	Listening on port 36137
+1648387297894	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387297896	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:35033","noProxy":[],"sslProxy":"127.0.0.1:35033"}
+1648387299129	Marionette	INFO	Listening on port 42305
+1648387299358	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648387299360	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:39193","noProxy":[],"sslProxy":"127.0.0.1:39193"}
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1648388829317	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileMs76w3"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648388830933	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileMs76w3/search.json.mozlz4", (void 0)))
+1648388832836	Marionette	INFO	Listening on port 43577
+1648388833052	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648388833054	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:45483","noProxy":[],"sslProxy":"127.0.0.1:45483"}
+1648388838447	Marionette	INFO	Stopped listening on port 43577
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648388880813	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilegxgYyu"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648388882297	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilegxgYyu/search.json.mozlz4", (void 0)))
+Exiting due to channel error.
+Exiting due to channel error.
+1648389123404	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileJyxpUr"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648389125199	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileJyxpUr/search.json.mozlz4", (void 0)))
+1648389127101	Marionette	INFO	Listening on port 33239
+1648389127271	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648389127273	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:46773","noProxy":[],"sslProxy":"127.0.0.1:46773"}
+1648389132703	Marionette	INFO	Stopped listening on port 33239
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+1648389136778	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofiletvXW92"
+*** You are running in headless mode.
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: glxtest: libEGL initialize failed
+1648389138198	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofiletvXW92/search.json.mozlz4", (void 0)))
+1648389140050	Marionette	INFO	Listening on port 41425
+1648389140176	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1648389140180	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:37963","noProxy":[],"sslProxy":"127.0.0.1:37963"}
+1648389145665	Marionette	INFO	Stopped listening on port 41425
+
+###!!! [Parent][PContentParent] Error: Send(msgname=PContent::Msg_DestroyBrowsingContextGroup) Closed channel: cannot send/recv
+
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 718: Error: Phase "Sqlite.jsm: wait until all connections are closed" is finished, it is too late to register completion condition "protections.sqlite#0: waiting for shutdown"
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+

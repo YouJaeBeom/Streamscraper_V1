@@ -7,9 +7,9 @@ import AuthenticationManager
 
 
 # This block of code enables us to call the script from command line.
-def execute(keyword,process_number,x_guest_token, authorization):
+def execute(query,process_number,x_guest_token):
     try:
-        command = "python ScrapingEngine.py --keyword '%s' --process_number '%s'  --x_guest_token '%s' --authorization '%s' "%(keyword, process_number, x_guest_token, authorization)
+        command = "python ScrapingEngine.py --query '%s' --process_number '%s'  --x_guest_token '%s' "%(query, process_number, x_guest_token)
         print(command)
         os.system(command)
     except Exception as ex:
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     start=time.time()
     
     with open('list.txt', 'r') as f:
-        keyword_list = f.read().split(',')
+        query_list = f.read().split(',')
     
     with open('language_list.txt', 'r') as f:
         language_list = f.read().split(',')
@@ -32,16 +32,15 @@ if __name__ == '__main__':
     for index in range(0,num_of_process):
         num_of_process_list.append(index)
     x=0
-    for keyword in (keyword_list):
+    for query in (query_list):
         # Creating the tuple of all the processes
         x_guest_token = None
-        authorization = None
         while True:
-            x_guest_token, authorization  = AuthenticationManager.get_brwoser(keyword,int(num_of_process_list[x]))
-            if x_guest_token != None and authorization != None:
+            x_guest_token  = AuthenticationManager.get_brwoser(query)
+            if x_guest_token != None:
                 break
         x=x+1
         process_pool = multiprocessing.Pool(processes = num_of_process)
-        process_pool.starmap(execute, zip(repeat(keyword), num_of_process_list, repeat(x_guest_token) ,  repeat(authorization) ))
+        process_pool.starmap(execute, zip(repeat(query), num_of_process_list, repeat(x_guest_token) ))
 
 print("-------%s seconds -----"%(time.time()-start))
