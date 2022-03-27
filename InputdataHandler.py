@@ -24,7 +24,11 @@ if __name__ == '__main__':
         query_list = f.read().split(',')
     
     with open('language_list.txt', 'r') as f:
-        language_list = f.read().split(',')
+        language_list_txt = f.readlines()
+    language_list =[]
+    for language in language_list_txt:
+        language=language.strip()
+        language_list.append(language)
     
     num_of_process = len(language_list)
     
@@ -36,7 +40,8 @@ if __name__ == '__main__':
         # Creating the tuple of all the processes
         x_guest_token = None
         while True:
-            x_guest_token  = AuthenticationManager.get_brwoser(query)
+            #x_guest_token  = AuthenticationManager.get_brwoser(query)
+            x_guest_token = AuthenticationManager.get_x_guest_token()
             if x_guest_token != None:
                 break
         x=x+1

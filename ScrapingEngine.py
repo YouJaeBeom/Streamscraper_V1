@@ -37,7 +37,14 @@ class ScrapingEngine(object):
         
         ## Setting Language type
         with open('language_list.txt', 'r') as f:
-            self.language_list = f.read().split(',')
+            language_list_txt = f.readlines()
+        self.language_list =[]
+        
+        for language in language_list_txt:
+            language=language.strip()
+            self.language_list.append(language)
+        
+        
         self.accept_language = self.language_list[int(self.process_number)]
         self.x_twitter_client_language = self.language_list[int(self.process_number)]
 
@@ -64,8 +71,19 @@ class ScrapingEngine(object):
 
         ## get URL
         self.url = self.set_search_url()
-        
+
+        request_count = 0 
+
         while (True):
+            request_count = request_count + 1
+
+            if request_count == 100 :
+                request_count = 0
+                while True:
+                    #self.x_guest_token  = AuthenticationManager.get_brwoser(self.query)
+                    self.x_guest_token = AuthenticationManager.get_x_guest_token()
+                    if self.x_guest_token != None :
+                        break
             ## setting header
             self.headers = {
                     'Accept': '*/*',
@@ -123,7 +141,6 @@ class ScrapingEngine(object):
                         params=self.params,
                         timeout=2
                         )
-                print(self.response.cookies)
                 self.response_json = self.response.json()
                 
                 try:
@@ -148,7 +165,8 @@ class ScrapingEngine(object):
                 logger.critical(result_print)
                 print(result_print)
                 while True:
-                    self.x_guest_token  = AuthenticationManager.get_brwoser(self.query)
+                    #self.x_guest_token  = AuthenticationManager.get_brwoser(self.query)
+                    self.x_guest_token = AuthenticationManager.get_x_guest_token()
                     if self.x_guest_token != None :
                         break
                 continue
