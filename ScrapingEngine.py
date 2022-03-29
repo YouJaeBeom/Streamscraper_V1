@@ -84,6 +84,12 @@ class ScrapingEngine(object):
                     self.x_guest_token = AuthenticationManager.get_x_guest_token()
                     if self.x_guest_token != None :
                         break
+            ## setting cookies
+            self.cookies = {
+                    'lang': self.accept_language,
+                    'dnt': '0',
+            }  
+            
             ## setting header
             self.headers = {
                     'Accept': '*/*',
@@ -138,6 +144,7 @@ class ScrapingEngine(object):
                 self.response = requests.get(
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
+                        cookies=self.cookies,
                         params=self.params,
                         timeout=2
                         )
@@ -190,7 +197,7 @@ class ScrapingEngine(object):
             if quote_count == 0 :    
                 self.totalcount = self.totalcount + 1
                 try:                    
-                    self.producer.send("streamscraper", json.dumps(tweet).encode('utf-8'))
+                    self.producer.send("streamscraper_17", json.dumps(tweet).encode('utf-8'))
                     self.producer.flush()
                 except Exception as ex:
                     logger.critical(ex)

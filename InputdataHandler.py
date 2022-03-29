@@ -19,10 +19,14 @@ def execute(query,process_number,x_guest_token):
 
 if __name__ == '__main__':
     start=time.time()
-    
     with open('list.txt', 'r') as f:
-        query_list = f.read().split(',')
-    
+        query_list_txt = f.read().split(',')
+
+    query_list =[]
+    for query in query_list_txt:
+        query=query.strip()
+        query_list.append(query)
+
     with open('language_list.txt', 'r') as f:
         language_list_txt = f.read().split(",")
     language_list =[]
