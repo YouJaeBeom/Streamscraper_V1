@@ -187,7 +187,24 @@ class ScrapingEngine(object):
         """ 
         ## setup
         tweets = self.tweets
-            
+        
+        if self.cursor == None :
+            tweet = list(tweets)[0]
+            try:
+                quote_count = tweet['quote_count']
+            except Exception as ex:
+                pass
+            if quote_count == 0 :
+                self.totalcount = self.totalcount + 1
+                try:
+                    self.producer.send("minsun", json.dumps(tweet).encode('utf-8'))
+                    self.producer.flush()
+                except Exception as ex:
+                    logger.critical(ex)
+                    print(ex)
+            else:
+                pass
+
         ## tweets to tweet
         for tweet in tweets:  
             try:                    
@@ -197,7 +214,7 @@ class ScrapingEngine(object):
             if quote_count == 0 :    
                 self.totalcount = self.totalcount + 1
                 try:                    
-                    self.producer.send("streamscraper_17", json.dumps(tweet).encode('utf-8'))
+                    self.producer.send("minsun", json.dumps(tweet).encode('utf-8'))
                     self.producer.flush()
                 except Exception as ex:
                     logger.critical(ex)
