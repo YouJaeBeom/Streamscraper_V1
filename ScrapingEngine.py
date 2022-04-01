@@ -207,7 +207,7 @@ class ScrapingEngine(object):
             if quote_count == 0 :    
                 self.totalcount = self.totalcount + 1
                 try:                    
-                    self.producer.send("minsun", json.dumps(tweet).encode('utf-8'))
+                    self.producer.send("tweet", json.dumps(tweet).encode('utf-8'))
                     self.producer.flush()
                 except Exception as ex:
                     logger.critical(ex)

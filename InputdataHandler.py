@@ -62,8 +62,8 @@ def query_execute(query_index):
 
     x_guest_token = None
     while True:
-        #x_guest_token  = AuthenticationManager.get_brwoser(query)
-        x_guest_token = AuthenticationManager.get_x_guest_token()
+        x_guest_token  = AuthenticationManager.get_brwoser(query)
+        #x_guest_token = AuthenticationManager.get_x_guest_token()
         if x_guest_token != None:
             break
     process_pool = multiprocessing.Pool(processes = num_of_lang)

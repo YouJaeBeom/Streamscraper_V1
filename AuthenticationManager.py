@@ -19,13 +19,12 @@ def get_profile():
     profile = webdriver.FirefoxProfile()
     profile.set_preference("browser.privatebrowsing.autostart", True)
 
-def get_brwoser(keyword,process_number):
+def get_brwoser(keyword):
     """
     Get Cookie, Authorization through Firefox browser
     """
 
     ## drowser setting
-    time.sleep(2)
     options = Options()
     options.headless = True
     driver = webdriver.Firefox(firefox_profile=get_profile(), options=options)
@@ -44,15 +43,14 @@ def get_brwoser(keyword,process_number):
         try:
             x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
             x_guest_token =  str(x_guest_token.replace("gt=",""))
-            authorization = str(Headers['authorization'])
-            if x_guest_token != None and authorization != None :
+            if x_guest_token != None  :
                 ## browser close
                 driver.close()
                 driver.quit()
-                return x_guest_token, authorization
+                return x_guest_token
         except :
             pass
 
     driver.close()
     driver.quit()
-    return None, None
+    return None
