@@ -1,15 +1,58 @@
 import requests 
 import json
 
-def get_x_guest_token():
-    url_token = 'https://api.twitter.com/1.1/guest/activate.json'
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver import ActionChains
+from seletools.actions import drag_and_drop
+from seleniumwire import webdriver  # Import from seleniumwire
+from selenium.webdriver.firefox.options import Options
+from itertools import repeat
+import time
 
-    headers = {
-        'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
-    }
-    x_guest_token = None
-    try:
-        x_guest_token = json.loads(requests.post(url_token, headers=headers).text)['guest_token']
-    except Exception as ex:
-        print(ex)
-    return x_guest_token
+
+def get_profile():
+    """
+    Firefox browser settings
+    """
+    profile = webdriver.FirefoxProfile()
+    profile.set_preference("browser.privatebrowsing.autostart", True)
+
+def get_brwoser(keyword,process_number):
+    """
+    Get Cookie, Authorization through Firefox browser
+    """
+
+    ## drowser setting
+    time.sleep(2)
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(firefox_profile=get_profile(), options=options)
+
+    ## brwoser execute
+    url = "https://twitter.com/search?q="+keyword+"&src=typed_query&f=live"
+    driver.get(url)
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(2)
+
+    ## get Cookie, Authorization
+    for request in driver.requests:
+        ## get token, authorization values
+        Cookie = str(request.headers['Cookie']).replace(" ","").split(";")
+        Headers = request.headers
+        try:
+            x_guest_token = [x_guest_token for x_guest_token in Cookie if "gt=" in x_guest_token][0]
+            x_guest_token =  str(x_guest_token.replace("gt=",""))
+            authorization = str(Headers['authorization'])
+            if x_guest_token != None and authorization != None :
+                ## browser close
+                driver.close()
+                driver.quit()
+                return x_guest_token, authorization
+        except :
+            pass
+
+    driver.close()
+    driver.quit()
+    return None, None

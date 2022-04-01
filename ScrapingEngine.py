@@ -80,15 +80,10 @@ class ScrapingEngine(object):
             if request_count == 100 :
                 request_count = 0
                 while True:
-                    #self.x_guest_token  = AuthenticationManager.get_brwoser(self.query)
-                    self.x_guest_token = AuthenticationManager.get_x_guest_token()
+                    self.x_guest_token  = AuthenticationManager.get_brwoser(self.query)
+                    #self.x_guest_token = AuthenticationManager.get_x_guest_token()
                     if self.x_guest_token != None :
                         break
-            ## setting cookies
-            self.cookies = {
-                    'lang': self.accept_language,
-                    'dnt': '0',
-            }  
             
             ## setting header
             self.headers = {
@@ -144,7 +139,6 @@ class ScrapingEngine(object):
                 self.response = requests.get(
                         'https://twitter.com/i/api/2/search/adaptive.json', 
                         headers=self.headers,
-                        cookies=self.cookies,
                         params=self.params,
                         timeout=2
                         )
@@ -172,8 +166,7 @@ class ScrapingEngine(object):
                 logger.critical(result_print)
                 print(result_print)
                 while True:
-                    #self.x_guest_token  = AuthenticationManager.get_brwoser(self.query)
-                    self.x_guest_token = AuthenticationManager.get_x_guest_token()
+                    self.x_guest_token  = AuthenticationManager.get_brwoser(self.query)
                     if self.x_guest_token != None :
                         break
                 continue
