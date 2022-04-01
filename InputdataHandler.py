@@ -48,7 +48,6 @@ def query_execute(query_index):
 
     for index in range(0,num_of_lang):
         num_of_lang_list.append(index)
-    x=0
 
     with open('list.txt', 'r') as f:
         query_list_txt = f.read().split(',')
